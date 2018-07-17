@@ -3,7 +3,11 @@ This is the repository for "Efficient Low-rank Multimodal Fusion with Modality-S
 
 # Requirements
 Python 2.7
+
+
 PyTorch <= 0.3
+
+
 CMU-MultimodalDataSDK (Compatible version currently not available): https://github.com/A2Zadeh/CMU-MultimodalSDK
 
 # Important Notice
