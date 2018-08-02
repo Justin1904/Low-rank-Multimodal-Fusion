@@ -215,7 +215,7 @@ if __name__ == "__main__":
     OPTIONS.add_argument('--signiture', dest='signiture', type=str, default='')
     OPTIONS.add_argument('--cuda', dest='cuda', type=bool, default=False)
     OPTIONS.add_argument('--data_path', dest='data_path',
-                         type=str, default='/media/bighdd3/ying/LMF/data/')
+                         type=str, default='directory/to/data/')
     OPTIONS.add_argument('--model_path', dest='model_path',
                          type=str, default='models')
     OPTIONS.add_argument('--output_path', dest='output_path',
