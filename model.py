@@ -144,7 +144,9 @@ class LMF(nn.Module):
         text_h = self.text_subnet(text_x)
         batch_size = audio_h.data.shape[0]
 
-        # next we perform "low-rank multimodal fusion"
+        # next we perform low-rank multimodal fusion
+        # here is a more efficient implementation than the one the paper describes
+        # basically swapping the order of summation and elementwise product
         if audio_h.is_cuda:
             DTYPE = torch.cuda.FloatTensor
         else:
@@ -158,6 +160,9 @@ class LMF(nn.Module):
         fusion_video = torch.matmul(_video_h, self.video_factor)
         fusion_text = torch.matmul(_text_h, self.text_factor)
         fusion_zy = fusion_audio * fusion_video * fusion_text
+
+        # output = torch.sum(fusion_zy, dim=1)
+        # use linear transformation instead of simple summation, more flexibility
         output = torch.matmul(self.fusion_weights, fusion_zy.permute(1, 0, 2)).squeeze() + self.fusion_bias
         output = output.view(-1, self.output_dim)
         if self.use_softmax:
