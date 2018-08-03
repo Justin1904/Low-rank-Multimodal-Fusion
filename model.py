@@ -161,7 +161,7 @@ class LMF(nn.Module):
         fusion_text = torch.matmul(_text_h, self.text_factor)
         fusion_zy = fusion_audio * fusion_video * fusion_text
 
-        # output = torch.sum(fusion_zy, dim=1)
+        # output = torch.sum(fusion_zy, dim=0).squeeze()
         # use linear transformation instead of simple summation, more flexibility
         output = torch.matmul(self.fusion_weights, fusion_zy.permute(1, 0, 2)).squeeze() + self.fusion_bias
         output = output.view(-1, self.output_dim)
