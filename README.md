@@ -25,6 +25,8 @@ To run the code, you should download the picked datasets and put them in the `da
 
 To run the code for experiments (grid search), use the scripts `train_xxx.py`. They have some commandline arguments as listed here:
 
+________________________________
+
 `run_id`: an user-specified unique ID to ensure that saved results/models don't override each other.
 
 `epochs`: the number of maximum epochs in training. Note that the actual number of epochs will be determined also by the `patience` argument.
@@ -47,3 +49,8 @@ To run the code for experiments (grid search), use the scripts `train_xxx.py`. T
 
 `emotion`: (exclusive for IEMOCAP) specifies which emotion category you want to train the model to predict. Can be 'happy', 'sad', 'angry', 'neutral'.
 
+_____________________________
+
+An example would be
+
+`python train_mosi.py --run_id 19260817 --epochs 50 --patience 20 --output_dim 1 --signiture test_run`
