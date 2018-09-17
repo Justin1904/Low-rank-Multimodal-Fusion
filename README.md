@@ -1,6 +1,6 @@
 # Low-rank-Multimodal-Fusion
 
-This is the repository for "Efficient Low-rank Multimodal Fusion with Modality-Specific Factors", Zhun and Ying, et. al. ACL 2018.
+This is the repository for "Efficient Low-rank Multimodal Fusion with Modality-Specific Factors", Liu and Shen, et. al. ACL 2018.
 
 ## Dependencies
 
