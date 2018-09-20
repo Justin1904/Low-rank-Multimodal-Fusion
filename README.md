@@ -19,7 +19,7 @@ The processed data for the experiments (CMU-MOSI, IEMOCAP, POM) can be downloade
 
 https://drive.google.com/open?id=1CixSaw3dpHESNG0CaCJV6KutdlANP_cr
 
-To run the code, you should download the picked datasets and put them in the `data` directory.
+To run the code, you should download the pickled datasets and put them in the `data` directory.
 
 ## Training Your Model
 
