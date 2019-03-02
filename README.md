@@ -54,3 +54,7 @@ _____________________________
 An example would be
 
 `python train_mosi.py --run_id 19260817 --epochs 50 --patience 20 --output_dim 1 --signiture test_run`
+
+## Hyperparameters
+
+Some hyper parameters for reproducing the results in the paper are in the `hyperparams.txt` file.
