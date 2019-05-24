@@ -21,6 +21,8 @@ https://drive.google.com/open?id=1CixSaw3dpHESNG0CaCJV6KutdlANP_cr
 
 To run the code, you should download the pickled datasets and put them in the `data` directory.
 
+Note that there might be NaN values in acoustic features, you could replace them with 0s.
+
 ## Training Your Model
 
 To run the code for experiments (grid search), use the scripts `train_xxx.py`. They have some commandline arguments as listed here:
