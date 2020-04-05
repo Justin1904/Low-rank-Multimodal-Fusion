@@ -119,11 +119,11 @@ class LMF(nn.Module):
         # define the post_fusion layers
         self.post_fusion_dropout = nn.Dropout(p=self.post_fusion_prob)
         # self.post_fusion_layer_1 = nn.Linear((self.text_out + 1) * (self.video_hidden + 1) * (self.audio_hidden + 1), self.post_fusion_dim)
-        self.audio_factor = Parameter(torch.Tensor(self.rank, self.audio_hidden + 1, self.output_dim).cuda())
-        self.video_factor = Parameter(torch.Tensor(self.rank, self.video_hidden + 1, self.output_dim).cuda())
-        self.text_factor = Parameter(torch.Tensor(self.rank, self.text_out + 1, self.output_dim).cuda())
-        self.fusion_weights = Parameter(torch.Tensor(1, self.rank).cuda())
-        self.fusion_bias = Parameter(torch.Tensor(1, self.output_dim).cuda())
+        self.audio_factor = Parameter(torch.Tensor(self.rank, self.audio_hidden + 1, self.output_dim))
+        self.video_factor = Parameter(torch.Tensor(self.rank, self.video_hidden + 1, self.output_dim))
+        self.text_factor = Parameter(torch.Tensor(self.rank, self.text_out + 1, self.output_dim))
+        self.fusion_weights = Parameter(torch.Tensor(1, self.rank))
+        self.fusion_bias = Parameter(torch.Tensor(1, self.output_dim))
 
         # init teh factors
         xavier_normal(self.audio_factor)

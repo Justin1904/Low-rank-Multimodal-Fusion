@@ -1,10 +1,20 @@
 from torch.utils.data import Dataset
-import cPickle as pickle
+import sys
 
-AUDIO = 'covarep'
-VISUAL = 'facet'
-TEXT = 'glove'
-LABEL = 'label'
+if sys.version_info.major == 2:
+    import cPickle as pickle
+else:
+    import pickle
+
+import pdb
+
+AUDIO = b'covarep'
+VISUAL = b'facet'
+TEXT = b'glove'
+LABEL = b'label'
+TRAIN = b'train'
+VALID = b'valid'
+TEST = b'test'
 
 def total(params):
     '''
@@ -33,8 +43,11 @@ def load_pom(data_path):
         def __len__(self):
             return self.audio.shape[0]
 
-    pom_data = pickle.load(open(data_path + "pom.pkl", 'rb'))
-    pom_train, pom_valid, pom_test = pom_data['train'], pom_data['valid'], pom_data['test']
+    if sys.version_info.major == 2:
+        pom_data = pickle.load(open(data_path + "pom.pkl", 'rb'))
+    else:
+        pom_data = pickle.load(open(data_path + "pom.pkl", 'rb'), encoding='bytes')
+    pom_train, pom_valid, pom_test = pom_data[TRAIN], pom_data[VALID], pom_data[TEST]
 
     train_audio, train_visual, train_text, train_labels \
         = pom_train[AUDIO], pom_train[VISUAL], pom_train[TEXT], pom_train[LABEL]
@@ -86,9 +99,11 @@ def load_iemocap(data_path, emotion):
         def __len__(self):
             return self.audio.shape[0]
 
-
-    iemocap_data = pickle.load(open(data_path + "iemocap.pkl", 'rb'))
-    iemocap_train, iemocap_valid, iemocap_test = iemocap_data[emotion]['train'], iemocap_data[emotion]['valid'], iemocap_data[emotion]['test']
+    if sys.version_info.major == 2:
+        iemocap_data = pickle.load(open(data_path + "iemocap.pkl", 'rb'))
+    else:
+        iemocap_data = pickle.load(open(data_path + "iemocap.pkl", 'rb'), encoding='bytes')
+    iemocap_train, iemocap_valid, iemocap_test = iemocap_data[emotion][TRAIN], iemocap_data[emotion][VALID], iemocap_data[emotion][TEST]
 
     train_audio, train_visual, train_text, train_labels \
         = iemocap_train[AUDIO], iemocap_train[VISUAL], iemocap_train[TEXT], iemocap_train[LABEL]
@@ -142,8 +157,11 @@ def load_mosi(data_path):
         def __len__(self):
             return self.audio.shape[0]
 
-    mosi_data = pickle.load(open(data_path + "mosi.pkl", 'rb'))
-    mosi_train, mosi_valid, mosi_test = mosi_data['train'], mosi_data['valid'], mosi_data['test']
+    if sys.version_info.major == 2:
+        mosi_data = pickle.load(open(data_path + "mosi.pkl", 'rb'))
+    else:
+        mosi_data = pickle.load(open(data_path + "mosi.pkl", 'rb'), encoding='bytes')
+    mosi_train, mosi_valid, mosi_test = mosi_data[TRAIN], mosi_data[VALID], mosi_data[TEST]
 
     train_audio, train_visual, train_text, train_labels \
         = mosi_train[AUDIO], mosi_train[VISUAL], mosi_train[TEXT], mosi_train[LABEL]

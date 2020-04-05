@@ -43,6 +43,8 @@ def main(options):
         output_path, "results_{}_{}.csv".format(signiture, run_id))
     print("Temp location for models: {}".format(model_path))
     print("Grid search results are in: {}".format(output_path))
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    os.makedirs(os.path.dirname(model_path), exist_ok=True)
 
     train_set, valid_set, test_set, input_dims = load_mosi(data_path)
 
@@ -77,7 +79,7 @@ def main(options):
         ahid = random.choice(params['audio_hidden'])
         vhid = random.choice(params['video_hidden'])
         thid = random.choice(params['text_hidden'])
-        thid_2 = thid / 2
+        thid_2 = thid // 2
         adr = random.choice(params['audio_dropout'])
         vdr = random.choice(params['video_dropout'])
         tdr = random.choice(params['text_dropout'])
@@ -101,7 +103,7 @@ def main(options):
         print("Model initialized")
         criterion = nn.L1Loss(size_average=False)
         factors = list(model.parameters())[:3]
-        other = list(model.parameters())[5:]
+        other = list(model.parameters())[3:]
         optimizer = optim.Adam([{"params": factors, "lr": factor_lr}, {"params": other, "lr": lr}], weight_decay=decay)
 
         # setup training
@@ -231,7 +233,7 @@ if __name__ == "__main__":
     OPTIONS.add_argument('--patience', dest='patience', type=int, default=20)
     OPTIONS.add_argument('--output_dim', dest='output_dim', type=int, default=1)
     OPTIONS.add_argument('--signiture', dest='signiture', type=str, default='mosi')     
-    OPTIONS.add_argument('--cuda', dest='cuda', type=bool, default=True)
+    OPTIONS.add_argument('--cuda', dest='cuda', type=bool, default=False)
     OPTIONS.add_argument('--data_path', dest='data_path',
                          type=str, default='./data/')
     OPTIONS.add_argument('--model_path', dest='model_path',
