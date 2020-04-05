@@ -30,32 +30,32 @@ Note that there might be NaN values in acoustic features, you could replace them
 To run the code for experiments (grid search), use the scripts `train_xxx.py`. They have some commandline arguments as listed here:
 
 ```
-`run_id`: an user-specified unique ID to ensure that saved results/models don't override each other.
+`--run_id`: an user-specified unique ID to ensure that saved results/models don't override each other.
 
-`epochs`: the number of maximum epochs in training. Note that the actual number of epochs will be determined also by the `patience` argument.
+`--epochs`: the number of maximum epochs in training. Since early-stopping is used to prevent overfitting, in actual training the number of epochs could be less than what you specify here.
 
-`patience`: the number of epochs the model is allowed to fluctuate without improvements on the validation set during training. E.g when the patience is set to 5 and the model's performance fluctuates without exceeding previous best for 5 epochs consecutively, the training stops.
+`--patience`: if the model performance does not improve in `--patience` many validation evaluations consecutively, the training will early-stop.
 
-`output_dim`: for regression tasks it is usually set as 1. But for IEMOCAP and POM the tasks can be viewed as a multitask learning problem where the model is required to predict the level of presence of all emotions/speaker traits at once. In that case you can set it to multiple dimensions.
+`output_dim`: output dimension of the model. Default value in each script should work.
 
-`signiture`: optional string for comment.
+`signiture`: an optional string that's added to the output file name. Intended to use as some sort of comment.
 
-`cuda`: whether or not to use GPU in training
+`cuda`: whether or not to use GPU in training. If not specified, will use CPU.
 
 `data_path`: the path to the data directory. Defaults to './data', but if you prefer storing the data else where you can change this.
 
-`model_path`: the path to the directory where the models that are trained are saved.
+`model_path`: the path to the directory where models will be saved.
 
-`output_path`: the path to the directory where the grid search results are saved.
+`output_path`: the path to the directory where the grid search results will be saved.
 
-`max_len`: the maximum length of training data. Longer/shorter sequences will be truncated/padded.
+`max_len`: the maximum length of training data sequences. Longer/shorter sequences will be truncated/padded.
 
 `emotion`: (exclusive for IEMOCAP) specifies which emotion category you want to train the model to predict. Can be 'happy', 'sad', 'angry', 'neutral'.
 ```
 
 An example would be
 
-`python train_mosi.py --run_id 19260817 --epochs 50 --patience 20 --output_dim 1 --signiture test_run`
+`python train_mosi.py --run_id 19260817 --epochs 50 --patience 20 --output_dim 1 --signiture test_run_big_model`
 
 ## Hyperparameters
 
