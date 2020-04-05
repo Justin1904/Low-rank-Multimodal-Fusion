@@ -4,13 +4,15 @@ This is the repository for "Efficient Low-rank Multimodal Fusion with Modality-S
 
 ## Dependencies
 
-Python 2.7
+Python 2.7 (now experimentally has Python 3.6+ support)
 
-PyTorch 0.3.0
-
+```
+torch=0.3.1
 sklearn
-
 numpy
+```
+
+You can install the libraries via `python -m pip install -r requirements.txt`.
 
 
 ## Data for Experiments
@@ -27,8 +29,7 @@ Note that there might be NaN values in acoustic features, you could replace them
 
 To run the code for experiments (grid search), use the scripts `train_xxx.py`. They have some commandline arguments as listed here:
 
-________________________________
-
+```
 `run_id`: an user-specified unique ID to ensure that saved results/models don't override each other.
 
 `epochs`: the number of maximum epochs in training. Note that the actual number of epochs will be determined also by the `patience` argument.
@@ -50,8 +51,7 @@ ________________________________
 `max_len`: the maximum length of training data. Longer/shorter sequences will be truncated/padded.
 
 `emotion`: (exclusive for IEMOCAP) specifies which emotion category you want to train the model to predict. Can be 'happy', 'sad', 'angry', 'neutral'.
-
-_____________________________
+```
 
 An example would be
 
